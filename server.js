@@ -26,6 +26,7 @@ const database = {
   ]
 }
 // console.log(database.users[0].email, database.users[0].password)
+// console.log(database.users[0].id)
 
 app.get('/', (req, res) => {
   res.send(database.users)
@@ -51,6 +52,20 @@ app.post('/register', (req, res) => {
     joined: new Date()
   })
   res.json(database.users[database.users.length - 1]);
+})
+
+app.get('/profile/:id', (req, res) => {
+  const { id } = req.params;
+  let found = false;
+  database.users.forEach(user => {
+    if (user.id === id) {
+      found = true;
+      return res.json(user);
+    }
+  })
+  if (!found) {
+    res.status(400).json('no such user');
+  }
 })
 
 app.listen(3000, () => {
