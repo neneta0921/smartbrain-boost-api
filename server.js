@@ -11,7 +11,7 @@ app.use(cors());
 const database = {
   users: [
     {
-      id: 123,
+      id: '123',
       name: 'Dan',
       email: 'dan@gmail.com',
       password: 'cooking',
@@ -19,7 +19,7 @@ const database = {
       joined: new Date()
     },
     {
-      id: 124,
+      id: '124',
       name: 'Jane',
       email: 'jane@gmail.com',
       password: 'bananas',
@@ -52,7 +52,8 @@ app.post('/signin', (req, res) => {
   });
   if (req.body.email === database.users[0].email &&
       req.body.password === database.users[0].password) {
-        res.json('success');
+        // res.json('success');
+        res.json(database.users[0]);
   } else {
     res.status(400).json('error logging in');
   }
@@ -67,7 +68,6 @@ app.post('/register', (req, res) => {
     id: 125,
     name: name,
     email: email,
-    password: password,
     entries: 0,
     joined: new Date()
   })
@@ -78,6 +78,7 @@ app.get('/profile/:id', (req, res) => {
   const { id } = req.params;
   let found = false;
   database.users.forEach(user => {
+    // console.log(typeof(user.id), typeof(id))
     if (user.id === id) {
       found = true;
       return res.json(user);
@@ -88,7 +89,7 @@ app.get('/profile/:id', (req, res) => {
   }
 })
 
-app.put('./image', (req, res) => {
+app.put('/image', (req, res) => {
   const { id } = req.body;
   let found = false;
   database.users.forEach(user => {
