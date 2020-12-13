@@ -4,6 +4,7 @@ const config = require('../config');
 const API_KEY = config.restfulApiConfig.apiKey;
 
 const app = new Clarifai.App({ apiKey: API_KEY });
+// const app = new Clarifai.App({ apiKey: process.env.API_CLARIFAI });
 
 const handleApiCall = (req, res) => {
   app.models
