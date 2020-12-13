@@ -38,6 +38,6 @@ app.get('/profile/:id', profile.handleProfileGet(db))
 app.put('/image', image.handleImage(db))
 app.post('/imageurl', image.handleApiCall)
 
-app.listen(DATABASE_URL, () => {
+app.listen((process.env.PORT || DATABASE_URL), () => {
   console.log(`app is running on port ${DATABASE_URL}`)
 })
