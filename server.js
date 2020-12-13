@@ -3,6 +3,12 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
 
+const config = require('./config')
+const DATABASE_URL = config.restfulApiConfig.databaseURL;
+console.log(config.restfulApiConfig);
+console.log(process.env.NODE_ENV);
+console.log(process.env);
+
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
@@ -30,6 +36,6 @@ app.get('/profile/:id', profile.handleProfileGet(db))
 app.put('/image', image.handleImage(db))
 app.post('/imageurl', image.handleApiCall)
 
-app.listen(3000, () => {
-  console.log('app is running on port 3000')
+app.listen(DATABASE_URL, () => {
+  console.log(`app is running on port ${DATABASE_URL}`)
 })
