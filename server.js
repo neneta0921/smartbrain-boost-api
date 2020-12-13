@@ -3,11 +3,13 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
 
-const config = require('./config')
+const config = require('./config');
 const DATABASE_URL = config.restfulApiConfig.databaseURL;
-console.log(config.restfulApiConfig);
-console.log(process.env.NODE_ENV);
-console.log(process.env);
+const DATABASE_HOST = config.restfulApiConfig.databaseHost;
+const DATABASE_USER = config.restfulApiConfig.databaseUser;
+const DATABASE_PASSWORD = config.restfulApiConfig.databasePassword;
+const DATABASE_NAME = config.restfulApiConfig.databaseName;
+
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -17,10 +19,10 @@ const image = require('./controllers/image');
 const db = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : 'test',
-    database : 'smart-brain'
+    host : DATABASE_HOST,
+    user : DATABASE_USER,
+    password : DATABASE_PASSWORD,
+    database : DATABASE_NAME
   }
 });
 

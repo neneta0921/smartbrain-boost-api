@@ -1,10 +1,9 @@
 const Clarifai = require('clarifai');
 
-const API_KEY = process.env.REACT_APP_DEV_API_KEY;
+const config = require('../config');
+const API_KEY = config.restfulApiConfig.apiKey;
 
-const app = new Clarifai.App({
-  apiKey: 'test',
-});
+const app = new Clarifai.App({ apiKey: API_KEY });
 
 const handleApiCall = (req, res) => {
   app.models
