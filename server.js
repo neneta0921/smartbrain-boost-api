@@ -29,18 +29,18 @@ const image = require('./controllers/image');
 
 const db = knex({
   client: 'pg',
-  connection: {
-    host : DATABASE_HOST,
-    user : DATABASE_USER,
-    password : DATABASE_PASSWORD,
-    database : DATABASE_NAME
-  }
+  connection: process.env.POSTGRES_URI
+  // connection: {
+  //   host : DATABASE_HOST,
+  //   user : DATABASE_USER,
+  //   password : DATABASE_PASSWORD,
+  //   database : DATABASE_NAME
+  // }
 });
 
 const app = express();
 
-console.log('ok')
-
+console.log(bcrypt.hashSync('123'))
 app.use(morgan('combined'))
 app.use(cors());
 app.use(express.json());

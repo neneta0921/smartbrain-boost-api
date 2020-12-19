@@ -30,10 +30,10 @@ const Config = (env) => {
   return {
     restful: {
       databaseURL: process.env.DEV_DATABASE_URL,
-      databaseHost: process.env.DEV_DATABASE_HOST,
-      databaseUser: process.env.DEV_DATABASE_USER,
-      databasePassword: process.env.DEV_DATABASE_PASSWORD,
-      databaseName: process.env.DEV_DATABASE_NAME,
+      databaseHost: process.env.POSTGRES_HOST,
+      databaseUser: process.env.POSTGRES_USER,
+      databasePassword: process.env.POSTGRES_PASSWORD,
+      databaseName: process.env.POSTGRES_NAME,
       apiKey: process.env.DEV_API_KEY
     }
   }
