@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+const morgan = require('morgan');
 
 const config = require('./config');
 const DATABASE_URL = config.restfulApiConfig.databaseURL;
@@ -38,6 +39,9 @@ const db = knex({
 
 const app = express();
 
+console.log('ok')
+
+app.use(morgan('combined'))
 app.use(cors());
 app.use(express.json());
 
