@@ -16,25 +16,25 @@ const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
-const db = knex({
-  client: 'pg',
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-  }
-});
-
 // const db = knex({
 //   client: 'pg',
 //   connection: {
-//     host : DATABASE_HOST,
-//     user : DATABASE_USER,
-//     password : DATABASE_PASSWORD,
-//     database : DATABASE_NAME
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: {
+//       rejectUnauthorized: false
+//     }
 //   }
 // });
+
+const db = knex({
+  client: 'pg',
+  connection: {
+    host : DATABASE_HOST,
+    user : DATABASE_USER,
+    password : DATABASE_PASSWORD,
+    database : DATABASE_NAME
+  }
+});
 
 const app = express();
 
