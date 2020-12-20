@@ -29,6 +29,7 @@ app.get('/', (req, res) => { res.send('OK, it is working!') })
 app.post('/signin', signin.handleSingin(db, bcrypt))
 app.post('/register', register.handleRegister(db, bcrypt))
 app.get('/profile/:id', profile.handleProfileGet(db))
+app.post('/profile/:id', profile.handleProfileUpdate(db))
 app.put('/image', image.handleImage(db))
 app.post('/imageurl', image.handleApiCall)
 
