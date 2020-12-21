@@ -8,10 +8,11 @@ const morgan = require('morgan');
 const config = require('./config');
 const DATABASE_URL = config.restfulApiConfig.databaseURL;
 
-const register = require('./controllers/register');
-const signin = require('./controllers/signin');
-const profile = require('./controllers/profile');
-const image = require('./controllers/image');
+const { handleRegister } = require('./controllers/register');
+const { signinAuthentication } = require('./controllers/signin');
+const { handleProfileGet, handleProfileUpdate} = require('./controllers/profile');
+const { handleImage, handleApiCall } = require('./controllers/image');
+const { requireAuth } = require('./middleware/authorization');
 
 const db = knex({
   client: 'pg',
@@ -26,12 +27,17 @@ app.use(morgan('combined'))
 app.use(express.json());
 
 app.get('/', (req, res) => { res.send('OK, it is working!') })
-app.post('/signin', signin.signinAuthentication(db, bcrypt))
-app.post('/register', register.handleRegister(db, bcrypt))
-app.get('/profile/:id', profile.handleProfileGet(db))
-app.post('/profile/:id', profile.handleProfileUpdate(db))
-app.put('/image', image.handleImage(db))
-app.post('/imageurl', image.handleApiCall)
+app.post('/signin', signinAuthentication(db, bcrypt))
+app.post('/register', handleRegister(db, bcrypt))
+app.get('/profile/:id', requireAuth, handleProfileGet(db))
+app.post('/profile/:id', requireAuth, handleProfileUpdate(db))
+app.put('/image', requireAuth, handleImage(db))
+app.post('/imageurl', requireAuth, handleApiCall)
+
+// app.post('/profile/:id', function (req, res, next) {
+//   console.log('ID:', req.params.id)
+//   next()
+// }, handleProfileUpdate(db))
 
 app.listen((process.env.PORT || DATABASE_URL), () => {
   console.log(`app is running on port ${DATABASE_URL}`)
