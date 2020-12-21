@@ -34,11 +34,6 @@ app.post('/profile/:id', requireAuth, handleProfileUpdate(db))
 app.put('/image', requireAuth, handleImage(db))
 app.post('/imageurl', requireAuth, handleApiCall)
 
-// app.post('/profile/:id', function (req, res, next) {
-//   console.log('ID:', req.params.id)
-//   next()
-// }, handleProfileUpdate(db))
-
 app.listen((process.env.PORT || DATABASE_URL), () => {
   console.log(`app is running on port ${DATABASE_URL}`)
 })

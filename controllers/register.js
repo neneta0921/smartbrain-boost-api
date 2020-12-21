@@ -2,7 +2,6 @@ const { createSession } = require('./session');
 
 const handleRegister = (db, bcrypt) => (req, res) => {
   const {email, name, password} = req.body;
-  console.log('REGISTER:', name, email, password)
   if(!email || !name || !password) {
     return res.status(400).json('incorrect form submission');
   }
@@ -24,13 +23,9 @@ const handleRegister = (db, bcrypt) => (req, res) => {
           joined: new Date()
         })
         .then(resp => {
-          console.log('user[0]', resp[0])
           const user = resp[0]
           createSession(user)
-            .then(data => {
-              console.log(data)
-              res.json(data)
-            })
+            .then(data => res.json(data))
         })
     })
     .then(trx.commit)
