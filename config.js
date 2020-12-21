@@ -39,5 +39,6 @@ const Config = (env) => {
   }
 }
 
-const restfulApiConfig = Config('production').restful;
+// const restfulApiConfig = Config('production').restful;
+const restfulApiConfig = Config().restful;
 module.exports = { restfulApiConfig };
